@@ -8,16 +8,7 @@ while (have_posts()) : the_post();
 ?>
 
 <main role="main">
-    <?php
-    $image = materialize_template_default_image();
-    if ($image != '') {
-        ?>
-        <div class="parallax-container">
-            <div class="parallax"><img src="<?php echo $image; ?>"></div>
-        </div>
-        <?php
-    }
-    ?>
+  
     <div class="white" style="background-color: #<?php background_color(); ?>!important; background-image: url(<?php background_image(); ?>); background-size: cover;">
         <div class="row container">
 	        <?php get_sidebar('left-sidebar'); ?>

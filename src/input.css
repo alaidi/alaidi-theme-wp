@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+   table a {
+        @apply text-blue-500 hover:text-blue-700 transition-colors duration-300 underline;
+    }
+    /* for the table make it full width responsive and with striped rows and bordered*/
+    table {
+        @apply w-full;
+    }
+    table tr {
+        @apply bg-gray-100;
+    }
+    table td {
+        @apply p-2;
+    }
+    table th {
+        @apply p-2;
+    }
+    table tr:nth-child(even) {
+        @apply bg-gray-200;
+    }
+    table tr:hover {
+        @apply bg-gray-300;
+    }
+    table td:hover {
+        @apply bg-gray-300;
+    }
+    table th:hover {
+        @apply bg-gray-300;
+    }
+    table td, table th {
+        @apply border border-gray-300;
+    }
+}

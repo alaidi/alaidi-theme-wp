@@ -22,7 +22,7 @@ $semester_courses = get_semester_courses($semester_page_id);
 $is_semester_page = ($current_page_id == $semester_page_id);
 ?>
 
-<div x-data="{ sidebarOpen: false }" @keydown.escape="sidebarOpen = false" class="flex h-full bg-gray-100">
+<div x-data="{ sidebarOpen: false }" @keydown.escape="sidebarOpen = false" class="flex h-screen bg-gray-100">
     <!-- Sidebar -->
     <div class="fixed bg-white h-full mb-8">
     <div class="bg-white w-64 fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0" 
@@ -98,7 +98,7 @@ $is_semester_page = ($current_page_id == $semester_page_id);
             </div>
         </div>
 
-        <footer class="bg-white shadow-md mt-8 py-4">
+        <footer class="bg-white shadow-md mt-auto py-4">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <p class="text-center text-gray-600">
                     alaidi <span>&copy; 2016-<?php echo date('Y'); ?> All Rights Reserved.</span>
