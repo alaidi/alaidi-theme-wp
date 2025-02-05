@@ -3,6 +3,50 @@
 Template Name: Course Home
 */
 get_header();
+
+// Function to extract year and semester from page title
+function extract_semester_info($title) {
+    $matches = [];
+    preg_match('/(\w+)\s*(\d{4})/', $title, $matches);
+    
+    if (count($matches) === 3) {
+        $semester = strtolower($matches[1]);
+        $year = intval($matches[2]);
+        
+        // Convert semesters to numeric for sorting
+        $semester_order = [
+        'spring' => 1,
+        'fall' => 2,
+        '' => 3  // For years without a specific semester
+        ];
+        
+        return [
+            'semester' => $semester,
+            'year' => $year,
+        'sort_value' => ($year * 10) + ($semester_order[$semester] ?? 3)
+        ];
+    }
+    
+    // Fallback for pages without clear semester/year
+    return [
+        'semester' => '',
+        'year' => 0,
+        'sort_value' => 0
+    ];
+}
+
+// Fetch and sort semesters
+$semesters = get_pages(array(
+    'sort_column' => 'menu_order',
+    'parent' => 0,
+));
+
+// Sort semesters by year and semester
+usort($semesters, function($a, $b) {
+    $a_info = extract_semester_info($a->post_title);
+    $b_info = extract_semester_info($b->post_title);
+    return $b_info['sort_value'] - $a_info['sort_value'];
+});
 ?>
 
 <div class="max-w-7xl mx-auto">
@@ -14,12 +58,7 @@ get_header();
         }
         ?>
     </header>
-
     <?php
-    $semesters = get_pages(array(
-        'sort_column' => 'menu_order',
-        'parent' => 0,
-    ));
     foreach ($semesters as $semester) :
         $courses = get_pages(array(
             'child_of' => $semester->ID,
@@ -60,5 +99,4 @@ get_header();
     endforeach;
     ?>
 </div>
-
 <?php get_footer(); ?>
